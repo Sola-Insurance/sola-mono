@@ -35,9 +35,6 @@ importers:
       '@trpc/server':
         specifier: ^11.0.0-rc.446
         version: 11.0.0-rc.566
-      drizzle-orm:
-        specifier: ^0.33.0
-        version: 0.33.0(@opentelemetry/api@1.9.0)(@types/pg@8.6.1)(@types/react@18.3.11)(postgres@3.4.4)(react@18.3.1)
       geist:
         specifier: ^1.3.0
         version: 1.3.1(next@14.2.15(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.48.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -81,18 +78,12 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.1.0
         version: 8.8.1(eslint@8.57.0)(typescript@5.6.3)
-      drizzle-kit:
-        specifier: ^0.24.0
-        version: 0.24.2
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
       eslint-config-next:
         specifier: ^14.2.4
         version: 14.2.15(eslint@8.57.0)(typescript@5.6.3)
-      eslint-plugin-drizzle:
-        specifier: ^0.2.3
-        version: 0.2.3(eslint@8.57.0)
       postcss:
         specifier: ^8.4.39
         version: 8.4.47
@@ -141,10 +132,10 @@ importers:
         version: 8.3.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.5)(typescript@5.4.5)
       '@storybook/react-vite':
         specifier: ^8.3.5
-        version: 8.3.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(storybook@8.3.5)(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11))
+        version: 8.3.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(storybook@8.3.5)(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11)(terser@5.34.1))
       '@vitejs/plugin-react':
         specifier: ^4.2.1
-        version: 4.2.1(vite@5.2.11(@types/node@20.16.11))
+        version: 4.2.1(vite@5.2.11(@types/node@20.16.11)(terser@5.34.1))
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -159,7 +150,7 @@ importers:
         version: 5.4.5
       vite:
         specifier: ^5.1.4
-        version: 5.2.11(@types/node@20.16.11)
+        version: 5.2.11(@types/node@20.16.11)(terser@5.34.1)
 
   apps/portals-new-2:
     dependencies:
@@ -7263,13 +7254,13 @@ snapshots:
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11)(terser@5.34.1))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.4.5)
-      vite: 5.2.11(@types/node@20.16.11)
+      vite: 5.2.11(@types/node@20.16.11)(terser@5.34.1)
     optionalDependencies:
       typescript: 5.4.5
 
@@ -8084,7 +8075,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.3.5(storybook@8.3.5)(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11))':
+  '@storybook/builder-vite@8.3.5(storybook@8.3.5)(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11)(terser@5.34.1))':
     dependencies:
       '@storybook/csf-plugin': 8.3.5(storybook@8.3.5)
       '@types/find-cache-dir': 3.2.1
@@ -8096,7 +8087,7 @@ snapshots:
       magic-string: 0.30.10
       storybook: 8.3.5
       ts-dedent: 2.2.0
-      vite: 5.2.11(@types/node@20.16.11)
+      vite: 5.2.11(@types/node@20.16.11)(terser@5.34.1)
     optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
@@ -8160,11 +8151,11 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.3.5
 
-  '@storybook/react-vite@8.3.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(storybook@8.3.5)(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11))':
+  '@storybook/react-vite@8.3.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.17.2)(storybook@8.3.5)(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11)(terser@5.34.1))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11)(terser@5.34.1))
       '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
-      '@storybook/builder-vite': 8.3.5(storybook@8.3.5)(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11))
+      '@storybook/builder-vite': 8.3.5(storybook@8.3.5)(typescript@5.4.5)(vite@5.2.11(@types/node@20.16.11)(terser@5.34.1))
       '@storybook/react': 8.3.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.5)(typescript@5.4.5)
       find-up: 5.0.0
       magic-string: 0.30.10
@@ -8174,7 +8165,7 @@ snapshots:
       resolve: 1.22.8
       storybook: 8.3.5
       tsconfig-paths: 4.2.0
-      vite: 5.2.11(@types/node@20.16.11)
+      vite: 5.2.11(@types/node@20.16.11)(terser@5.34.1)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - '@storybook/test'
@@ -8766,14 +8757,14 @@ snapshots:
       - jest
       - supports-color
 
-  '@vitejs/plugin-react@4.2.1(vite@5.2.11(@types/node@20.16.11))':
+  '@vitejs/plugin-react@4.2.1(vite@5.2.11(@types/node@20.16.11)(terser@5.34.1))':
     dependencies:
       '@babel/core': 7.24.5
       '@babel/plugin-transform-react-jsx-self': 7.24.5(@babel/core@7.24.5)
       '@babel/plugin-transform-react-jsx-source': 7.24.1(@babel/core@7.24.5)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.2.11(@types/node@20.16.11)
+      vite: 5.2.11(@types/node@20.16.11)(terser@5.34.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -13468,7 +13459,7 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite@5.2.11(@types/node@20.16.11):
+  vite@5.2.11(@types/node@20.16.11)(terser@5.34.1):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.47
@@ -13476,6 +13467,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.16.11
       fsevents: 2.3.3
+      terser: 5.34.1
 
   w3c-xmlserializer@4.0.0:
     dependencies:
