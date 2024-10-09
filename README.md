@@ -1,173 +1,77 @@
-# Turborepo Design System Starter
+# Sola
 
-This guide explains how to use a React design system starter powered by:
+## Installation
 
-- 🏎 [Turborepo](https://turbo.build/repo) — High-performance build system for Monorepos
-- 🚀 [React](https://reactjs.org/) — JavaScript library for user interfaces
-- 🛠 [Tsup](https://github.com/egoist/tsup) — TypeScript bundler powered by esbuild
-- 📖 [Storybook](https://storybook.js.org/) — UI component environment powered by Vite
+There are two ways of initializing an app using the `create-t3-turbo` starter. You can either use this repository as a template:
 
-As well as a few others tools preconfigured:
+![use-as-template](https://github.com/t3-oss/create-t3-turbo/assets/51714798/bb6c2e5d-d8b6-416e-aeb3-b3e50e2ca994)
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-- [Changesets](https://github.com/changesets/changesets) for managing versioning and changelogs
-- [GitHub Actions](https://github.com/changesets/action) for fully automated package publishing
-
-
-### Useful Commands
-
-- `pnpm build` - Build all packages, including the Storybook site
-- `pnpm dev` - Run all packages locally and preview with Storybook
-- `pnpm lint` - Lint all packages
-- `pnpm changeset` - Generate a changeset
-- `pnpm clean` - Clean up all `node_modules` and `dist` folders (runs each package's clean script)
-
-## Turborepo
-
-[Turborepo](https://turbo.build/repo) is a high-performance build system for JavaScript and TypeScript codebases. It was designed after the workflows used by massive software engineering organizations to ship code at scale. Turborepo abstracts the complex configuration needed for monorepos and provides fast, incremental builds with zero-configuration remote caching.
-
-Using Turborepo simplifies managing your design system monorepo, as you can have a single lint, build, test, and release process for all packages. [Learn more](https://vercel.com/blog/monorepos-are-changing-how-teams-build-software) about how monorepos improve your development workflow.
-
-## Apps & Packages
-
-This Turborepo includes the following packages and applications:
-
-- `apps/docs`: Component documentation site with Storybook
-- `packages/ui`: Core React components
-- `packages/utils`: Shared React utilities
-- `packages/typescript-config`: Shared `tsconfig.json`s used throughout the Turborepo
-- `packages/eslint-config`: ESLint preset
-
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/). Workspaces enables us to "hoist" dependencies that are shared between packages to the root `package.json`. This means smaller `node_modules` folders and a better local dev experience. To install a dependency for the entire monorepo, use the `-w` workspaces flag with `pnpm add`.
-
-This example sets up your `.gitignore` to exclude all generated files, other folders like `node_modules` used to store your dependencies.
-
-### Compilation
-
-To make the core library code work across all browsers, we need to compile the raw TypeScript and React code to plain JavaScript. We can accomplish this with `tsup`, which uses `esbuild` to greatly improve performance.
-
-Running `pnpm build` from the root of the Turborepo will run the `build` command defined in each package's `package.json` file. Turborepo runs each `build` in parallel and caches & hashes the output to speed up future builds.
-
-For `acme-core`, the `build` command is the following:
+or use Turbo's CLI to init your project (use PNPM as package manager):
 
 ```bash
-tsup src/index.tsx --format esm,cjs --dts --external react
+npx create-turbo@latest -e https://github.com/t3-oss/create-t3-turbo
 ```
 
-`tsup` compiles `src/index.tsx`, which exports all of the components in the design system, into both ES Modules and CommonJS formats as well as their TypeScript types. The `package.json` for `acme-core` then instructs the consumer to select the correct format:
+## About
 
-```json:acme-core/package.json
-{
-  "name": "@sola/core",
-  "version": "0.0.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "sideEffects": false,
-}
+Ever wondered how to migrate your T3 application into a monorepo? Stop right here! This is the perfect starter repo to get you running with the perfect stack!
+
+It uses [Turborepo](https://turborepo.org) and contains:
+
+```text
+.github
+  └─ workflows
+        └─ CI with pnpm cache setup
+.vscode
+  └─ Recommended extensions and settings for VSCode users
+apps
+  ├─ auth-proxy
+  |   ├─ Nitro server to proxy OAuth requests in preview deployments
+  |   └─ Uses Auth.js Core
+  ├─ Agents
+  ├─ Portal
+  └─ next.js
+      ├─ Next.js 14
+      ├─ React 18
+      ├─ Tailwind CSS
+      └─ E2E Typesafe API Server & Client
+packages
+  ├─ api
+  |   └─ tRPC v11 router definition
+  ├─ auth
+  |   └─ Authentication using next-auth.
+  ├─ db
+  |   └─ Typesafe db calls using Drizzle & Supabase
+  └─ ui
+      └─ Start of a UI package for the webapp using shadcn-ui
+tooling
+  ├─ eslint
+  |   └─ shared, fine-grained, eslint presets
+  ├─ prettier
+  |   └─ shared prettier configuration
+  ├─ tailwind
+  |   └─ shared tailwind configuration
+  └─ typescript
+      └─ shared tsconfig you can extend from
 ```
 
-## Components
+## Quick Start
 
-```tsx:sola/src/Button.tsx
-import * as React from 'react';
+> **Note**
+> The [db](./packages/db) package is preconfigured to use Supabase and is **edge-bound** with the [Vercel Postgres](https://github.com/vercel/storage/tree/main/packages/postgres) driver. If you're using something else, make the necessary modifications to the [schema](./packages/db/src/schema) as well as the [client](./packages/db/src/index.ts) and the [drizzle config](./packages/db/drizzle.config.ts). If you want to switch to non-edge database driver, remove `export const runtime = "edge";` [from all pages and api routes](https://github.com/t3-oss/create-t3-turbo/issues/634#issuecomment-1730240214).
 
-export interface ButtonProps {
-  children: React.ReactNode;
-}
+To get it running, follow the steps below:
 
-export function Button(props: ButtonProps) {
-  return <button>{props.children}</button>;
-}
-
-Button.displayName = 'Button';
-```
-
-When adding a new file, ensure the component is also exported from the entry `index.tsx` file:
-
-```tsx:acme-core/src/index.tsx
-import * as React from "react";
-export { Button, type ButtonProps } from "./Button";
-// Add new component exports here
-```
-
-## Storybook
-
-Storybook provides us with an interactive UI playground for our components. This allows us to preview our components in the browser and instantly see changes when developing locally. This example preconfigures Storybook to:
-
-- Use Vite to bundle stories instantly (in milliseconds)
-- Automatically find any stories inside the `stories/` folder
-- Support using module path aliases like `@sola-core` for imports
-- Write MDX for component documentation pages
-
-For example, here's the included Story for our `Button` component:
-
-```js:apps/docs/stories/button.stories.mdx
-import { Button } from '@sola-core/src';
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-
-<Meta title="Components/Button" component={Button} />
-
-# Button
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur tempor, nisl nunc egestas nisi, euismod aliquam nisl nunc euismod.
-
-## Props
-
-<Props of={Box} />
-
-## Examples
-
-<Preview>
-  <Story name="Default">
-    <Button>Hello</Button>
-  </Story>
-</Preview>
-```
-
-This example includes a few helpful Storybook scripts:
-
-- `pnpm dev`: Starts Storybook in dev mode with hot reloading at `localhost:6006`
-- `pnpm build`: Builds the Storybook UI and generates the static HTML files
-- `pnpm preview-storybook`: Starts a local server to view the generated Storybook UI
-
-## Versioning & Publishing Packages
-
-This example uses [Changesets](https://github.com/changesets/changesets) to manage versions, create changelogs, and publish to npm. It's preconfigured so you can start publishing packages immediately.
-
-You'll need to create an `NPM_TOKEN` and `GITHUB_TOKEN` and add it to your GitHub repository settings to enable access to npm. It's also worth installing the [Changesets bot](https://github.com/apps/changeset-bot) on your repository.
-
-### Generating the Changelog
-
-To generate your changelog, run `pnpm changeset` locally:
-
-1. **Which packages would you like to include?** – This shows which packages and changed and which have remained the same. By default, no packages are included. Press `space` to select the packages you want to include in the `changeset`.
-1. **Which packages should have a major bump?** – Press `space` to select the packages you want to bump versions for.
-1. If doing the first major version, confirm you want to release.
-1. Write a summary for the changes.
-1. Confirm the changeset looks as expected.
-1. A new Markdown file will be created in the `changeset` folder with the summary and a list of the packages included.
-
-### Releasing
-
-When you push your code to GitHub, the [GitHub Action](https://github.com/changesets/action) will run the `release` script defined in the root `package.json`:
+### 1. Setup dependencies
 
 ```bash
-turbo run build --filter=docs^... && changeset publish
-```
+# Install dependencies
+pnpm i
 
-Turborepo runs the `build` script for all publishable packages (excluding docs) and publishes the packages to npm. By default, this example includes `acme` as the npm organization. To change this, do the following:
+# Configure environment variables
+# There is an `.env.example` in the root directory you can use for reference
+cp .env.example .env
 
-- Rename folders in `packages/*` to replace `acme` with your desired scope
-- Search and replace `acme` with your desired scope
-- Re-run `pnpm install`
-
-To publish packages to a private npm organization scope, **remove** the following from each of the `package.json`'s
-
-```diff
-- "publishConfig": {
--  "access": "public"
-- },
+# Push the Drizzle schema to the database
+pnpm db:push
 ```
