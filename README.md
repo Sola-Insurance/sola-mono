@@ -15,13 +15,6 @@ As well as a few others tools preconfigured:
 - [Changesets](https://github.com/changesets/changesets) for managing versioning and changelogs
 - [GitHub Actions](https://github.com/changesets/action) for fully automated package publishing
 
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e design-system
-```
 
 ### Useful Commands
 
@@ -76,21 +69,9 @@ tsup src/index.tsx --format esm,cjs --dts --external react
 }
 ```
 
-Run `pnpm build` to confirm compilation is working correctly. You should see a folder `acme-core/dist` which contains the compiled output.
-
-```bash
-acme-core
-└── dist
-    ├── index.d.ts  <-- Types
-    ├── index.js    <-- CommonJS version
-    └── index.mjs   <-- ES Modules version
-```
-
 ## Components
 
-Each file inside of `acme-core/src` is a component inside our design system. For example:
-
-```tsx:acme-core/src/Button.tsx
+```tsx:sola/src/Button.tsx
 import * as React from 'react';
 
 export interface ButtonProps {
